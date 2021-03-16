@@ -1,0 +1,10 @@
+1. As a player, I want to see my stats in the right corner updated every second.
+2. As a player, I want to be able to move so I can kill mobs and solve puzzles.
+3. As a player, I want to have a sword to kill mobs in several hits in combat.
+4. As I player, I want to be able to choose from multiple characters with different powers.
+5. As a player, I want to be able to teleport when I fight.
+6. As a player, I want to be able to grab things and store them things in my unlimited/ limited  inventory.
+7. As a player, I can meet multiple types of environments in order to move differently depending on the environment (faster or slower).
+8. As a player, I want to choose from continuing a game or beginning a new one.
+9. As a player, I want to see my final results on the screen after a combat.
+10. As a player, I want to level and have my stats change as I advance in the game.
