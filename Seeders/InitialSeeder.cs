@@ -14,10 +14,12 @@ namespace EmagClone.Seeders
 
         private readonly ApplicationDbContext context;
         private readonly RoleManager<Role> roleManager;
+        private readonly UserManager<User> userManager;
 
 
-        public InitialSeeder(ApplicationDbContext context)
+        public InitialSeeder(ApplicationDbContext context, UserManager<User> userManager)
         {
+            this.userManager = userManager;
             this.context = context;
         }
 
@@ -31,6 +33,12 @@ namespace EmagClone.Seeders
                 context.Roles.Add(new Role { Name = "User" });
                 context.SaveChanges();
             }
+            if (!context.Products.Any())
+            {
+                context.Products.Add(new Product { Name = "Banane", SellerId = userManager.Users.First().Id });
+                context.SaveChanges();
+            }
+
         }
     }
 }

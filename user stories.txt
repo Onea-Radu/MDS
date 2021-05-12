@@ -1,15 +1,14 @@
 Online store 
 
-1. As a user, I want to log in using Facebook account. 
-2. As a user, I want to post about a product so others can buy it. 
-3. As a user, I want to buy posted products. 
-4. As a user, I want to gather multiple products and order them at once. 
-5. As a user, I want to have a profile.
-6. As a user, I want to search through products by name or tag.
-7. As a user, I want to filter products by one or 2 criteria.
-8. As a user, I want to leave reviews to products after I buy them.
-9. As a user, I want to mark products as favorites and see them in a special menu.
-10. As a user, I want to be able to report a problem with the website or a product to the admin. 
-11. As an admin, I want to have CRUD rights over all products.
-12. As an admin, I want to be able to delete or deactivate users.
-13. As an unregistered user, I want to be able to see posted products. 
+1. As a user, I want to post about a product so others can buy it. 
+2. As a user, I want to buy posted products. 
+3. As a user, I want to gather multiple products and order them at once. 
+4. As a user, I want to have a profile.
+5. As a user, I want to search through products by name or tag.
+6. As a user, I want to filter products by one or 2 criteria.
+7. As a user, I want to leave reviews to products after I buy them.
+8. As a user, I want to mark products as favorites and see them in a special menu.
+9. As a user, I want to be able to report a problem with the website or a product to the admin. 
+10. As an admin, I want to have CRUD rights over all products.
+11. As an admin, I want to be able to delete or deactivate users.
+12. As an unregistered user, I want to be able to see posted products. 
