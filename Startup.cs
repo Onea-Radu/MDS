@@ -1,10 +1,13 @@
 using EmagClone.Entities;
+using EmagClone.Options;
 using EmagClone.Seeders;
+using EmagClone.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,10 +37,53 @@ namespace OldIronIronWeTake
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("Default"), b => b.MigrationsAssembly("EmagClone")));
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<Role>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<User, Role>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>(options =>
+           {
+               // Password settings
+               options.Password.RequireDigit = true;
+               options.Password.RequiredLength = 8;
+               options.Password.RequireNonAlphanumeric = false;
+               options.Password.RequireUppercase = true;
+               options.Password.RequireLowercase = false;
+               options.Password.RequiredUniqueChars = 6;
 
+               // Lockout settings
+               options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+               options.Lockout.MaxFailedAccessAttempts = 10;
+               options.Lockout.AllowedForNewUsers = true;
+
+               // User settings
+               options.User.RequireUniqueEmail = true;
+           });
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Facebook:Id"];
+                facebookOptions.AppSecret = Configuration["Facebook:Secret"];
+            });
+
+
+            services.AddAuthentication()
+        .AddGoogle(options =>
+        {
+            options.ClientId = Configuration["Google:Id"];
+            options.ClientSecret = Configuration["Google:Secret"];
+        });
+
+            // Add application services.
+            services.AddTransient<IEmailSender, MailKitEmailSender>();
+            services.Configure<MailKitEmailSenderOptions>(options =>
+            {
+                options.Host_Address = "smtp.gmail.com";
+                options.Host_Port = 587;
+                options.Host_Username = "emagemag43@gmail.com";
+                options.Host_Password = Configuration["SmtpPass"];
+                options.Sender_Email = "emagemag43@gmail.com";
+                options.Sender_Name = "Emag Emag";
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
