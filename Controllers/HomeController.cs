@@ -1,4 +1,5 @@
 ﻿using EmagClone.Seeders;
+using EmagClone.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OldIronIronWeTake.Data;
@@ -15,19 +16,17 @@ namespace OldIronIronWeTake.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ISeeder seeder;
-        private readonly ApplicationDbContext context;
+        private readonly ProductService productService;
 
-        public HomeController(ILogger<HomeController> logger, ISeeder seeder, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ISeeder seeder, ProductService productService)
         {
-            this.context = context;
             _logger = logger;
             this.seeder = seeder;
+            this.productService = productService;
         }
 
         public IActionResult Index()
         {
-            seeder.Seed();
-            Debug.WriteLine(context.Products.Select(p => p.Name));
             return View();
         }
 
