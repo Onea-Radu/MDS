@@ -27,17 +27,17 @@ namespace EmagClone.Services
             return context.Products.Find(id);
         }
 
-        public bool Post(String name, Guid userId)
+        public bool Post(Product product, Guid userId)
         {
 
             User user = context.Users.Find(userId);
 
-            if (user == null)
+            if (user == null || product == null)
             {
                 return false;
             }
 
-            context.Products.Add(new Product { Name = name, Seller = user });
+            context.Products.Add(new Product { Name = product.Name, Seller = user });
             context.SaveChanges();
             return true;
         }
