@@ -27,11 +27,11 @@ namespace EmagClone.Services
             return context.Products.Find(id);
         }
 
-        public bool Post( String name, Guid userId )
+        public bool Post(String name, Guid userId)
         {
 
             User user = context.Users.Find(userId);
-            
+
             if (user == null)
             {
                 return false;
@@ -42,31 +42,34 @@ namespace EmagClone.Services
             return true;
         }
 
-        public bool Update( String nume, int id)
+        public bool Update(Product product, int id)
         {
-            Product product = context.Products.Find(id);
 
-            if ( product == null )
+            try
             {
-                return false;
+                Product productContext = context.Products.Find(id);
+                if (product == null)
+                {
+                    return false;
+                }
+
+                if (productContext == null)
+                {
+                    return false;
+                }
+
+                try
+                {
+                    productContext.Stock = product.Stock;
+                    productContext.Name = product.Name;
+                }
+
+                catch (Exception e) { return false; }
+
+                context.SaveChanges();
+
             }
-
-            product.Name = nume;
-            context.SaveChanges();
-            return true;
-        }
-
-        public bool Update(Guid sellerId, int id)
-        {
-            Product product = context.Products.Find(id);
-
-            if (product == null)
-            {
-                return false;
-            }
-
-            product.SellerId = sellerId;
-            context.SaveChanges();
+            catch (Exception e) { return false; }
             return true;
         }
 
