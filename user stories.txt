@@ -12,3 +12,5 @@ Online store
 10. As an admin, I want to have CRUD rights over all products.
 11. As an admin, I want to be able to delete or deactivate users.
 12. As an unregistered user, I want to be able to see posted products. 
+13. As a user i want to login and register with facebook.
+14. As a user i want to login and register with google.
