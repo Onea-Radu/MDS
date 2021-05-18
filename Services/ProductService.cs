@@ -1,4 +1,5 @@
 ﻿using EmagClone.Entities;
+using Microsoft.EntityFrameworkCore;
 using OldIronIronWeTake.Data;
 using System;
 using System.Collections.Generic;
@@ -19,52 +20,51 @@ namespace EmagClone.Services
 
         public List<Product> GetAll()
         {
-            return context.Products.ToList();
+            return context.Products.Include("Seller").ToList();
         }
 
         public Product Get(int id)
         {
-            return context.Products.Find(id);
+            var x = context.Products.Include("Seller").Where(p => p.Id == id);
+            if (!x.Any())
+            {
+                return null;
+            }
+            return x.First();
         }
 
-        public bool Post(Product product, Guid userId)
+        public bool Post(Product product)
         {
 
-            User user = context.Users.Find(userId);
-
-            if (user == null || product == null)
+            if (product == null)
             {
                 return false;
             }
 
-            context.Products.Add(new Product { Name = product.Name, Seller = user });
+            context.Products.Add(product);
             context.SaveChanges();
             return true;
         }
 
         public bool Update(Product product, int id)
         {
+            if (product == null || id != product.Id)
+            {
+                return false;
+            }
 
             try
             {
                 Product productContext = context.Products.Find(id);
-                if (product == null)
-                {
-                    return false;
-                }
+
 
                 if (productContext == null)
                 {
                     return false;
                 }
 
-                try
-                {
-                    productContext.Stock = product.Stock;
-                    productContext.Name = product.Name;
-                }
-
-                catch (Exception e) { return false; }
+                productContext.Stock = product.Stock;
+                productContext.Name = product.Name;
 
                 context.SaveChanges();
 
@@ -75,11 +75,13 @@ namespace EmagClone.Services
 
         public bool Delete(int id)
         {
+
             Product product = context.Products.Find(id);
             if (product == null)
             {
                 return false;
             }
+
             context.Remove(product);
             context.SaveChanges();
             return true;
