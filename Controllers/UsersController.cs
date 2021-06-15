@@ -1,4 +1,5 @@
 ﻿using EmagClone.Entities;
+using EmagClone.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,13 @@ namespace EmagClone.Controllers
     {
 
         private readonly UserManager<User> manager;
+        private FavoritesService favoritesService;
+
+        public UsersController(UserManager<User> userManager, FavoritesService favoritesService)
+        {
+            this.manager = userManager;
+            this.favoritesService = favoritesService;
+        }
 
         public IActionResult Index()
         {
@@ -34,6 +42,12 @@ namespace EmagClone.Controllers
         public async Task<IActionResult> Order()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Favorites()
+        {
+
+            return View(manager);
         }
     }
 }
