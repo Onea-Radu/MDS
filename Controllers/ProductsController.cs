@@ -127,6 +127,5 @@ namespace EmagClone.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-       
     }
 }
