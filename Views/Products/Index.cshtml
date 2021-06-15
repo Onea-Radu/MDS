@@ -39,7 +39,7 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <form method="post" asp-action="Delete" asp-route-id="@item.Id"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
             </td>
         </tr>
 }
