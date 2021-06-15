@@ -17,7 +17,6 @@ namespace EmagClone.Controllers
     {
         private readonly ProductService service;
         private readonly UserManager<User> manager;
-
         public ProductsController(ProductService service, UserManager<User> manager)
         {
             this.service = service;
@@ -25,10 +24,17 @@ namespace EmagClone.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string keyword)
         {
-            return View(service.GetAll());
+            if (keyword == null || keyword == "")
+            {
+                return View(service.GetAll());
+            }
+
+            return View(service.Search(keyword));
+
         }
+
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -126,6 +132,5 @@ namespace EmagClone.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
     }
 }
