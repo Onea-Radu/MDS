@@ -39,9 +39,9 @@ namespace EmagClone.Controllers
             }
 
             var product = service.Get((int)id);
-            Debug.WriteLine("ceva string" + product.SellerId);
-            Debug.WriteLine("ceva string 2 " + product.Seller == null);
-            Debug.WriteLine("ceva string 3 " + product.Seller.UserName);
+            //Debug.WriteLine("ceva string" + product.SellerId);
+            //Debug.WriteLine("ceva string 2 " + product.Seller == null);
+            //Debug.WriteLine("ceva string 3 " + product.Seller.UserName);
 
             if (product == null)
             {
