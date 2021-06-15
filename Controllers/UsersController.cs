@@ -26,7 +26,6 @@ namespace EmagClone.Controllers
 
         public async Task<IActionResult> Cart()
         {
-
             return View();
         }
 
