@@ -15,6 +15,7 @@ namespace EmagClone.Controllers
 
         private readonly UserManager<User> manager;
         private FavoritesService favoritesService;
+        private CartService cartService;
 
         public UsersController(UserManager<User> userManager, FavoritesService favoritesService)
         {
@@ -32,12 +33,40 @@ namespace EmagClone.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "User,Store,Admin")]
         public async Task<IActionResult> Cart()
         {
-            return View();
+            var user = (await manager.GetUserAsync(HttpContext.User));
+            return View(favoritesService.GetAll(user));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User,Store,Admin")]
+        public async Task<IActionResult> AddToCard(int pid)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = (await manager.GetUserAsync(HttpContext.User));
+                cartService.AddToCart(pid, user);
+                return RedirectToAction(nameof(Cart));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User,Store,Admin")]
+        public async Task<IActionResult> RemoveFromCart(int id)
+        {
+            if (!cartService.RemoveFromCart(id))
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction(nameof(Cart));
+        }
 
         public async Task<IActionResult> Order()
         {

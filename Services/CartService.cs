@@ -14,24 +14,47 @@ namespace EmagClone.Services
         private readonly ApplicationDbContext context;
         private readonly UserManager<User> userManager;
 
-        public CartService(ApplicationDbContext context, UserManager<User> manager)
+        public CartService(ApplicationDbContext context, UserManager<User> userManager)
         {
             this.context = context;
-            this.userManager = manager;
+            this.userManager = userManager;
         }
 
-        //public async bool AddtoCart(Product product)
-        //{
-        //    var id = (await userManager.GetUserAsync(User)).Id;
-        //    var cart = new CartProductsUsers
-        //    {
-        //        Product = product,
-        //        UserId = id;
-        //    };
-        //    context.CartProductsUsers.Add()
+        public List<CartProductsUsers> GetAll(User user)
+        {
+            return context.CartProductsUsers.Where(u => u.User == user).ToList();
+        }
 
-        //    return false;
-        //}
+        //maybe do it with product id
+        public bool AddToCart(int pid, User user)
+        {
+            try
+            {
+                var prod = new CartProductsUsers { Product = context.Products.Find(pid), User = user };
+                context.CartProductsUsers.Add(prod);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveFromCart(int id)
+        {
+            try
+            {
+                var prod = context.CartProductsUsers.Find(id);
+                context.CartProductsUsers.Remove(prod);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
     }
 }
