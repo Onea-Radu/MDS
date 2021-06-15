@@ -24,11 +24,12 @@ namespace EmagClone.Services
             return context.FavoriteProductsUsers.Where(u => u.User == user).ToList();
         }
 
-        public bool AddToFavorites(Product p, User user)
+        //maybe do it with product id
+        public bool AddToFavorites(int pid, User user)
         {
             try
             {
-                var prod = new FavoriteProductsUsers { Product = p, User = user };
+                var prod = new FavoriteProductsUsers { Product = context.Products.Find(pid), User = user };
                 context.FavoriteProductsUsers.Add(prod);
                 context.SaveChanges();
                 return true;

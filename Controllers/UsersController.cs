@@ -1,5 +1,6 @@
 ﻿using EmagClone.Entities;
 using EmagClone.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -43,10 +44,39 @@ namespace EmagClone.Controllers
             return View();
         }
 
+        [Authorize(Roles = "User,Store,Admin")]
         public async Task<IActionResult> Favorites()
         {
+            var user = (await manager.GetUserAsync(HttpContext.User));
+            return View(favoritesService.GetAll(user));
+        }
 
-            return View(manager);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User,Store,Admin")]
+        public async Task<IActionResult> AddFavorite(int pid)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = (await manager.GetUserAsync(HttpContext.User));
+                favoritesService.AddToFavorites(pid, user);
+                return RedirectToAction(nameof(Favorites));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User,Store,Admin")]
+        public async Task<IActionResult> RemoveFavorite(int id)
+        {
+            if (!favoritesService.RemoveFromFavorites(id))
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction(nameof(Favorites));
         }
     }
 }
