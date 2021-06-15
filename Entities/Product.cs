@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace EmagClone.Entities
 {
@@ -11,5 +13,6 @@ namespace EmagClone.Entities
         public Guid SellerId { get; set; }
         public virtual User Seller { get; set; }
 
+        public virtual ICollection<Review> Reviews { get; set;}
     }
 }
