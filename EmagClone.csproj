@@ -7,6 +7,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Migrations\20210615130016_reviews.orders.problems.cs" />
+	  <Compile Remove="Migrations\20210615130016_reviews.orders.problems.Designer.cs" />
+	  <Compile Remove="Migrations\20210615132546_reviews.orders.problemss.cs" />
+	  <Compile Remove="Migrations\20210615132546_reviews.orders.problemss.Designer.cs" />
+	  <Compile Remove="Migrations\20210615132722_reviews.orders.problemss.cs" />
+	  <Compile Remove="Migrations\20210615132722_reviews.orders.problemss.Designer.cs" />
+	  <Compile Remove="Migrations\20210615133127_reviews.orders.problems.cs" />
+	  <Compile Remove="Migrations\20210615133127_reviews.orders.problems.Designer.cs" />
+	  <Compile Remove="Migrations\20210615133722_reviews-orders-problems.cs" />
+	  <Compile Remove="Migrations\20210615133722_reviews-orders-problems.Designer.cs" />
+	  <Compile Remove="Migrations\20210615133913_reviews-orders-problems.cs" />
+	  <Compile Remove="Migrations\20210615133913_reviews-orders-problems.Designer.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="MailKit" Version="2.12.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.15" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.15" />

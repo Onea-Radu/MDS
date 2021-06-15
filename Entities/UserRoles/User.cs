@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EmagClone.Entities
 {
@@ -15,8 +16,7 @@ namespace EmagClone.Entities
         [MaxLength(200)]
         public String Name { get; set; }
 
-        public ICollection<Product> cart { get; set; }
-
-        public virtual ICollection<Product> FavoriteProducts { get; set; }
+        [ForeignKey("SellerId")]
+        public ICollection<Product> SellingProducts { get; set; }
     }
 }

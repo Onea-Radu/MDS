@@ -7,6 +7,7 @@ namespace EmagClone.Entities
 {
     public class Problem
     {
+        public int Id { get; set; }
         public String Text { get; set; }
         public User User { get; set; }
         public Guid UserId { get; set; }

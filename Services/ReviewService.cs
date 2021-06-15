@@ -23,9 +23,9 @@ namespace EmagClone.Services
             return context.Reviews.ToList();
         }
 
-        public Product Get(int id)
+        public Review Get(int id)
         {
-            var x = context.Products.Where(p => p.Id == id);
+            var x = context.Reviews.Where(p => p.Id == id);
             if (!x.Any())
             {
                 return null;
