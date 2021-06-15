@@ -32,5 +32,7 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <form asp-controller="Users" method="post" asp-action="AddToCart" asp-route-id="@Model.Id"><a id="delete" onclick="this.parentElement.submit()">Add to cart</a></form> |
+    <form asp-controller="Users" method="post" asp-action="AddFavorite" asp-route-id="@Model.Id"><a id="delete" onclick="this.parentElement.submit()">Add to favorites</a></form> |
     <a asp-action="Index">Back to List</a>
 </div>

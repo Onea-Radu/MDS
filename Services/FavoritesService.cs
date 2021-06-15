@@ -1,8 +1,10 @@
 ﻿using EmagClone.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OldIronIronWeTake.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,7 +23,7 @@ namespace EmagClone.Services
 
         public List<FavoriteProductsUsers> GetAll(User user)
         {
-            return context.FavoriteProductsUsers.Where(u => u.User == user).ToList();
+            return context.FavoriteProductsUsers.Include("Product").Where(u => u.User == user).ToList();
         }
 
         //maybe do it with product id

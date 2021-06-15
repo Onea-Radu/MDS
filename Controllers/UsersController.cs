@@ -17,10 +17,11 @@ namespace EmagClone.Controllers
         private FavoritesService favoritesService;
         private CartService cartService;
 
-        public UsersController(UserManager<User> userManager, FavoritesService favoritesService)
+        public UsersController(UserManager<User> userManager, FavoritesService favoritesService, CartService cart)
         {
             this.manager = userManager;
             this.favoritesService = favoritesService;
+            cartService = cart;
         }
 
         public IActionResult Index()
@@ -43,12 +44,15 @@ namespace EmagClone.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "User,Store,Admin")]
-        public async Task<IActionResult> AddToCard(int pid)
+        public async Task<IActionResult> AddToCart(int id)
         {
             if (ModelState.IsValid)
             {
                 var user = (await manager.GetUserAsync(HttpContext.User));
-                cartService.AddToCart(pid, user);
+                if (!cartService.AddToCart(id, user))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
                 return RedirectToAction(nameof(Cart));
             }
 
@@ -83,12 +87,14 @@ namespace EmagClone.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "User,Store,Admin")]
-        public async Task<IActionResult> AddFavorite(int pid)
+        public async Task<IActionResult> AddFavorite(int id)
         {
             if (ModelState.IsValid)
             {
                 var user = (await manager.GetUserAsync(HttpContext.User));
-                favoritesService.AddToFavorites(pid, user);
+                if (!favoritesService.AddToFavorites(id, user)) {
+                    return RedirectToAction(nameof(Index));
+                }
                 return RedirectToAction(nameof(Favorites));
             }
 
