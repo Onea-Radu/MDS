@@ -23,15 +23,22 @@ namespace EmagClone.Controllers
             this.manager = manager;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Create(int? ProductId)
+        public async Task<IActionResult> Create(int? id, Guid? UserId)
         {
-            if (ProductId == null)
+            if (id == null)
+            {
+                return NotFound();
+            }
+            if (UserId == null)
             {
                 return NotFound();
             }
 
-            ViewData["ProductId"] = (int)ProductId;
+            //Review r = new Review();
+            //r.ProductId = (int)id;
+            //r.UserId = (Guid)UserId;
+
+            ViewData["ProductId"] = (int)id;
             return View();
         }
 
@@ -40,15 +47,16 @@ namespace EmagClone.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Text,ProductId")] Review review)
+        //public async Task<IActionResult> Create([Bind("Text,")] Review review)
+        public async Task<IActionResult> Create(int id)
         {
             if (ModelState.IsValid)
             {
-                review.User = await manager.GetUserAsync(HttpContext.User);
-                service.Post(review);
+                var user = await manager.GetUserAsync(HttpContext.User);
+                service.Post(id, user);
                 return RedirectToAction(nameof(Index));
             }
-            return View(review);
+            return View();
         }
 
         //// GET: Reviews/Edit/5

@@ -33,13 +33,13 @@ namespace EmagClone.Services
             return x.First();
         }
 
-        public bool Post(Review review)
+        public bool Post(int? ProductId, User user)
         {
-
-            if (review == null)
+            if (ProductId == null || user == null)
             {
                 return false;
             }
+            var review = new Review { Product = context.Products.Find((int)ProductId), User = user };
 
             context.Reviews.Add(review);
             context.SaveChanges();
