@@ -23,13 +23,9 @@ namespace EmagClone.Controllers
             this.manager = manager;
         }
 
-        public async Task<IActionResult> Create(int? id, Guid? UserId)
+        public async Task<IActionResult> Create(int? id)
         {
             if (id == null)
-            {
-                return NotFound();
-            }
-            if (UserId == null)
             {
                 return NotFound();
             }
@@ -54,7 +50,7 @@ namespace EmagClone.Controllers
             {
                 var user = await manager.GetUserAsync(HttpContext.User);
                 service.Post(id, user);
-                return RedirectToAction(nameof(Index));
+                return Redirect("/Products/Details/" + id);
             }
             return View();
         }
