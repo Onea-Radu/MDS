@@ -33,6 +33,8 @@ namespace OldIronIronWeTake
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<FavoritesService>();
+            services.AddTransient<CartService>();
+            services.AddTransient<ReviewService>();
             services.AddTransient<ProductService>();
             services.AddTransient<ISeeder, InitialSeeder>();
             services.AddDbContext<ApplicationDbContext>(options =>
