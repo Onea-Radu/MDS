@@ -21,16 +21,20 @@ namespace EmagClone.Migrations
 
             modelBuilder.Entity("EmagClone.Entities.CartProductsUsers", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("ProductId", "UserId");
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("UserId");
 
@@ -39,16 +43,20 @@ namespace EmagClone.Migrations
 
             modelBuilder.Entity("EmagClone.Entities.FavoriteProductsUsers", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("ProductId", "UserId");
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("UserId");
 

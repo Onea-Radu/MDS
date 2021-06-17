@@ -52,8 +52,7 @@ namespace OldIronIronWeTake.Data
             //.WithMany()
             //.OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<FavoriteProductsUsers>()
-        .HasKey(bc => new { bc.ProductId, bc.UserId });
+
             modelBuilder.Entity<FavoriteProductsUsers>()
                 .HasOne(bc => bc.User)
                 .WithMany(b => b.favoriteProducts)
@@ -63,8 +62,7 @@ namespace OldIronIronWeTake.Data
                 .WithMany(c => c.favoriteProducts)
                 .HasForeignKey(bc => bc.ProductId);
 
-            modelBuilder.Entity<CartProductsUsers>()
-       .HasKey(bc => new { bc.ProductId, bc.UserId });
+
             modelBuilder.Entity<CartProductsUsers>()
                 .HasOne(bc => bc.User)
                 .WithMany(b => b.cartProducts)

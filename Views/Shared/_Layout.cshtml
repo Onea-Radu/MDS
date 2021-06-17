@@ -1,7 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Authorization;
-@using
-@inject UserManager<User> manager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,12 +36,7 @@
                         </li>
 
 
-                        @if (await manager.GetUserAsync(HttpContext.User).)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Problems" asp-action="Index">Problems</a>
-                            </li>
-                        }
+
                     </ul>
                 </div>
             </div>
