@@ -30,9 +30,9 @@ namespace EmagClone.Seeders
             Debug.WriteLine($"Salve");
             if (!context.Roles.Any())
             {
-                context.Roles.Add(new Role { Name = "Admin" });
-                context.Roles.Add(new Role { Name = "Store" });
-                context.Roles.Add(new Role { Name = "User" });
+                context.Roles.Add(new Role { Name = "Admin", NormalizedName = "Admin" });
+                context.Roles.Add(new Role { Name = "Store", NormalizedName = "Store" });
+                context.Roles.Add(new Role { Name = "User", NormalizedName = "User" });
                 context.SaveChanges();
             }
             //if (!context.Products.Any())
