@@ -22,6 +22,7 @@ namespace OldIronIronWeTake.Controllers
         {
             _logger = logger;
             this.seeder = seeder;
+            seeder.Seed();
             this.productService = productService;
         }
 

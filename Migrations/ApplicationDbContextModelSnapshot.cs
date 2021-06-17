@@ -352,13 +352,13 @@ namespace EmagClone.Migrations
                     b.HasOne("EmagClone.Entities.Product", "Product")
                         .WithMany("cartProducts")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("EmagClone.Entities.User", "User")
                         .WithMany("cartProducts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -367,13 +367,13 @@ namespace EmagClone.Migrations
                     b.HasOne("EmagClone.Entities.Product", "Product")
                         .WithMany("favoriteProducts")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("EmagClone.Entities.User", "User")
                         .WithMany("favoriteProducts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -410,7 +410,7 @@ namespace EmagClone.Migrations
                     b.HasOne("EmagClone.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
