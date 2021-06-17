@@ -49,7 +49,7 @@ namespace EmagClone.Controllers
             if (ModelState.IsValid)
             {
                 service.Add(problem);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index),"Home");
             }
 
             return View(problem);
