@@ -18,5 +18,8 @@ namespace EmagClone.Entities
 
         [ForeignKey("SellerId")]
         public ICollection<Product> SellingProducts { get; set; }
+        public ICollection<CartProductsUsers> cartProducts { get; set; }
+        public ICollection<FavoriteProductsUsers> favoriteProducts { get; set; }
+
     }
 }

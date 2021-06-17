@@ -27,30 +27,52 @@ namespace OldIronIronWeTake.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<CartProductsUsers>()
-            .HasOne(c => c.Product)
-            .WithMany()
-            .OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<CartProductsUsers>()
+            //.HasOne(c => c.Product)
+            //.WithMany()
+            //.OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<CartProductsUsers>()
-            .HasOne(c => c.User)
-            .WithMany()
-            .OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<CartProductsUsers>()
+            //.HasOne(c => c.User)
+            //.WithMany()
+            //.OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<FavoriteProductsUsers>()
+            //.HasOne(c => c.User)
+            //.WithMany()
+            //.OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<FavoriteProductsUsers>()
+            //.HasOne(c => c.Product)
+            //.WithMany()
+            //.OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Entity<Review>()
+            //.HasOne(c => c.User)
+            //.WithMany()
+            //.OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<FavoriteProductsUsers>()
-            .HasOne(c => c.User)
-            .WithMany()
-            .OnDelete(DeleteBehavior.NoAction);
-
+        .HasKey(bc => new { bc.ProductId, bc.UserId });
             modelBuilder.Entity<FavoriteProductsUsers>()
-            .HasOne(c => c.Product)
-            .WithMany()
-            .OnDelete(DeleteBehavior.NoAction);
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.favoriteProducts)
+                .HasForeignKey(bc => bc.UserId);
+            modelBuilder.Entity<FavoriteProductsUsers>()
+                .HasOne(bc => bc.Product)
+                .WithMany(c => c.favoriteProducts)
+                .HasForeignKey(bc => bc.ProductId);
 
-            modelBuilder.Entity<Review>()
-            .HasOne(c => c.User)
-            .WithMany()
-            .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<CartProductsUsers>()
+       .HasKey(bc => new { bc.ProductId, bc.UserId });
+            modelBuilder.Entity<CartProductsUsers>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.cartProducts)
+                .HasForeignKey(bc => bc.UserId);
+            modelBuilder.Entity<CartProductsUsers>()
+                .HasOne(bc => bc.Product)
+                .WithMany(c => c.cartProducts)
+                .HasForeignKey(bc => bc.ProductId);
         }
 
         public DbSet<Product> Products { get; set; }
