@@ -48,7 +48,7 @@ namespace EmagClone.Controllers
             problem.User = await manager.GetUserAsync(HttpContext.User);
             if (ModelState.IsValid)
             {
-
+                service.Add(problem);
                 return RedirectToAction(nameof(Index));
             }
 
