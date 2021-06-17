@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using EmagClone.Entities;
-using OldIronIronWeTake.Data;
+﻿using EmagClone.Entities;
 using EmagClone.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EmagClone.Controllers
 {
@@ -49,7 +43,7 @@ namespace EmagClone.Controllers
             if (ModelState.IsValid)
             {
                 service.Add(problem);
-                return RedirectToAction(nameof(Index),"Home");
+                return RedirectToAction(nameof(Index), "Home");
             }
 
             return View(problem);
