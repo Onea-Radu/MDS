@@ -14,6 +14,8 @@ namespace EmagClone.Entities
         public Guid SellerId { get; set; }
         public virtual User Seller { get; set; }
 
-        public virtual ICollection<Review> Reviews { get; set;}
+        public virtual ICollection<Review> Reviews { get; set; }
+        public ICollection<CartProductsUsers> cartProducts { get; set; }
+        public ICollection<FavoriteProductsUsers> favoriteProducts { get; set; }
     }
 }

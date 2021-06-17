@@ -19,6 +19,10 @@
 	  <Compile Remove="Migrations\20210615133722_reviews-orders-problems.Designer.cs" />
 	  <Compile Remove="Migrations\20210615133913_reviews-orders-problems.cs" />
 	  <Compile Remove="Migrations\20210615133913_reviews-orders-problems.Designer.cs" />
+	  <Compile Remove="Migrations\20210617192846_nume.cs" />
+	  <Compile Remove="Migrations\20210617192846_nume.Designer.cs" />
+	  <Compile Remove="Migrations\20210617193210_nume.cs" />
+	  <Compile Remove="Migrations\20210617193210_nume.Designer.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

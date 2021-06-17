@@ -3,6 +3,7 @@ using EmagClone.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OldIronIronWeTake.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,14 @@ namespace EmagClone.Controllers
         private readonly UserManager<User> manager;
         private FavoritesService favoritesService;
         private CartService cartService;
+        private readonly ApplicationDbContext context;
 
-        public UsersController(UserManager<User> userManager, FavoritesService favoritesService, CartService cart)
+        public UsersController(UserManager<User> userManager, FavoritesService favoritesService, CartService cart, ApplicationDbContext context)
         {
             this.manager = userManager;
             this.favoritesService = favoritesService;
             cartService = cart;
+            this.context = context;
         }
 
         public IActionResult Index()
@@ -92,7 +95,8 @@ namespace EmagClone.Controllers
             if (ModelState.IsValid)
             {
                 var user = (await manager.GetUserAsync(HttpContext.User));
-                if (!favoritesService.AddToFavorites(id, user)) {
+                if (!favoritesService.AddToFavorites(id, user))
+                {
                     return RedirectToAction(nameof(Index));
                 }
                 return RedirectToAction(nameof(Favorites));
@@ -113,5 +117,50 @@ namespace EmagClone.Controllers
 
             return RedirectToAction(nameof(Favorites));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User,Store,Admin")]
+        public async Task<bool> Delete(Guid id)
+        {
+            User user = context.Users.Find(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            context.Users.Remove(user);
+            context.SaveChanges();
+            return true;
+
+        }
+
+
+        /*
+          public bool deleteUser(int id)
+        {
+            User user = context.Users.Find(id);
+
+            if (user == null)
+            {
+                return false;
+            }
+            context.Remove(user);
+            context.SaveChanges();
+            return true;
+        }
+
+        public async Task<bool> changeAuthorizationAsync(int id)
+        {
+            User user = await userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
+            {
+                return false;
+            }
+        }
+         * */
+
     }
 }
