@@ -30,6 +30,18 @@
         </dd>
     </dl>
 </div>
+
+<div>
+    @if (Model.Reviews != null)
+    {
+        @foreach (var x in Model.Reviews)
+        {
+            @x.Text;
+        }
+    }
+
+</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-controller="Reviews" asp-action="Create" asp-route-id="@Model.Id">Add Review</a> | 

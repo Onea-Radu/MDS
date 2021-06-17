@@ -54,6 +54,7 @@ namespace EmagClone.Controllers
                 return NotFound();
             }
 
+            //Debug.WriteLine(product.Reviews.Count());
             return View(product);
         }
 

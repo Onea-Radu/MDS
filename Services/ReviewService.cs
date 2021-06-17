@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using EmagClone.Entities;
@@ -33,13 +34,21 @@ namespace EmagClone.Services
             return x.First();
         }
 
-        public bool Post(int? ProductId, User user)
+        public bool Post(Review review)
         {
-            if (ProductId == null || user == null)
+            //if (ProductId == null || user == null)
+            //{
+            //    return false;
+            //}
+            //var review = new Review { Product = context.Products.Find((int)ProductId), User = user };
+
+            if(review == null)
             {
                 return false;
             }
-            var review = new Review { Product = context.Products.Find((int)ProductId), User = user };
+
+            Debug.WriteLine(review.Text);
+            Debug.WriteLine(review.ProductId);
 
             context.Reviews.Add(review);
             context.SaveChanges();

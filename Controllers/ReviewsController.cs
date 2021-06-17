@@ -44,13 +44,15 @@ namespace EmagClone.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public async Task<IActionResult> Create([Bind("Text,")] Review review)
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> Create([Bind("Id,ProductId,Text")] Review review)
         {
             if (ModelState.IsValid)
             {
                 var user = await manager.GetUserAsync(HttpContext.User);
-                service.Post(id, user);
-                return Redirect("/Products/Details/" + id);
+
+
+                service.Post(review);
+                return Redirect("/Products/Details/" + review.ProductId);
             }
             return View();
         }
