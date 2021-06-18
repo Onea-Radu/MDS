@@ -6,14 +6,11 @@
 
 <h1>Favorites</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Product)
+                Your hearted products:
             </th>
             <th></th>
         </tr>
@@ -21,16 +18,22 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <form method="post" asp-action="RemoveFavorite" asp-route-id="@item.Id"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Product.Name)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Seller.UserName)
+            </td>
+            <td>
+                @if ((item.Product.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id"> Details </a>
+                }
+                <form method="post" asp-action="RemoveFavorite" asp-route-id="@item.Id"><a id="delete" onclick="this.parentElement.submit()">Remove from Favorites</a></form>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

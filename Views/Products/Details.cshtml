@@ -4,28 +4,21 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@Html.DisplayFor(model => model.Name)</h1>
 
 <div>
-    <h4>Product</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Stock)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Stock)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Seller)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Seller.UserName)
         </dd>
     </dl>
@@ -36,16 +29,28 @@
     {
         @foreach (var x in Model.Reviews)
         {
-            @x.Text;
+            <p>@x.User.UserName</p>
+            <p>@x.Text</p>
+
+            @if ((Model.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
+            {
+                <a asp-controller="Reviews" asp-action="Delete" asp-route-id="@x.Id">Delete</a>
+            }
         }
     }
 
 </div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-controller="Reviews" asp-action="Create" asp-route-id="@Model.Id">Add Review</a> | 
-    <form asp-controller="Users" method="post" asp-action="AddToCart" asp-route-id="@Model.Id"><a id="delete" onclick="this.parentElement.submit()">Add to cart</a></form> |
-    <form asp-controller="Users" method="post" asp-action="AddFavorite" asp-route-id="@Model.Id"><a id="delete" onclick="this.parentElement.submit()">Add to favorites</a></form> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Reviews" asp-action="Create" asp-route-id="@Model.Id">Add Review</a>
+    <form asp-controller="Users" method="post" asp-action="AddFavorite" asp-route-id="@Model.Id"><a id="delete" onclick="this.parentElement.submit()">Add to favorites</a></form>
+    <form asp-controller="Users" method="post" asp-action="AddToCart" asp-route-id="@Model.Id"><a id="delete" onclick="this.parentElement.submit()">Add to cart</a></form>
+
 </div>
+@if ((Model.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a asp-controller="Products" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+    </div>
+}

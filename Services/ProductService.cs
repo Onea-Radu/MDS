@@ -22,7 +22,10 @@ namespace EmagClone.Services
         {
             return context.Products.Include("Seller").ToList();
         }
-
+        public List<Product> GetByUser(User user)
+        {
+            return context.Products.Include("Seller").Where(p => p.Seller == user).ToList();
+        }
         public IEnumerable<Product> Search(string keyword)
         {
             return GetAll().Where(p => p.Name.Contains(keyword));

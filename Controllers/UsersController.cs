@@ -17,13 +17,15 @@ namespace EmagClone.Controllers
         private readonly UserManager<User> manager;
         private FavoritesService favoritesService;
         private CartService cartService;
+        private ProductService products;
         private readonly ApplicationDbContext context;
 
-        public UsersController(UserManager<User> userManager, FavoritesService favoritesService, CartService cart, ApplicationDbContext context)
+        public UsersController(UserManager<User> userManager, ProductService products, FavoritesService favoritesService, CartService cart, ApplicationDbContext context)
         {
             this.manager = userManager;
             this.favoritesService = favoritesService;
             cartService = cart;
+            this.products = products;
             this.context = context;
         }
 
@@ -41,7 +43,7 @@ namespace EmagClone.Controllers
         public async Task<IActionResult> Cart()
         {
             var user = (await manager.GetUserAsync(HttpContext.User));
-            return View(favoritesService.GetAll(user));
+            return View(cartService.GetAll(user));
         }
 
         [HttpPost]

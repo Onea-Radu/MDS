@@ -1,13 +1,16 @@
 ﻿@model IEnumerable<EmagClone.Entities.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All products";
 }
 
-<h1>Index</h1>
+    <h1>All products</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @if (User.IsInRole("Store") || User.IsInRole("Admin"))
+    {
+        <a asp-action="Create">Add product</a>
+    }
 </p>
 <table class="table">
     <thead>
@@ -27,23 +30,26 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seller.UserName)
+            </td>
+            @if ((item.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
+            {
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <form method="post" asp-action="Delete" asp-route-id="@item.Id"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
+                <form method="post" asp-controller="Users" asp-action="Delete" asp-route-id="6d19b9f7-3bcd-42fe-fc8c-08d931ccb105"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Stock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Seller.UserName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <form method="post" asp-action="Delete" asp-route-id="@item.Id"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
-                    <form method="post" asp-controller="Users" asp-action="Delete" asp-route-id="6d19b9f7-3bcd-42fe-fc8c-08d931ccb105"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
-                </td>
-            </tr>
+            }
+        </tr>
         }
     </tbody>
 </table>
