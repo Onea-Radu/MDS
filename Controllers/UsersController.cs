@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using OldIronIronWeTake.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -97,7 +98,9 @@ namespace EmagClone.Controllers
             if (ModelState.IsValid)
             {
                 var user = (await manager.GetUserAsync(HttpContext.User));
-                if (!favoritesService.AddToFavorites(id, user))
+                bool check = favoritesService.AddToFavorites(id, user);
+                Debug.Assert(check);
+                if (!check)
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -112,7 +115,9 @@ namespace EmagClone.Controllers
         [Authorize(Roles = "User,Store,Admin")]
         public async Task<IActionResult> RemoveFavorite(int id)
         {
-            if (!favoritesService.RemoveFromFavorites(id))
+            var check = favoritesService.RemoveFromFavorites(id);
+            Debug.Assert(favoritesService.RemoveFromFavorites(id));
+            if (!check)
             {
                 return NotFound();
             }
