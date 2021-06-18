@@ -127,7 +127,7 @@ namespace EmagClone.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "User,Store,Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<bool> Delete(Guid id)
         {
             User user = context.Users.Find(id);
@@ -144,8 +144,10 @@ namespace EmagClone.Controllers
         }
 
 
-        /*
-          public bool deleteUser(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<bool> changeAuthorizationAsync(int id)
         {
             User user = context.Users.Find(id);
 
@@ -153,21 +155,18 @@ namespace EmagClone.Controllers
             {
                 return false;
             }
-            context.Remove(user);
-            context.SaveChanges();
+
+            if ((await manager.GetRolesAsync(user)).Contains("Store"))
+            {
+                await manager.RemoveFromRoleAsync(user, "Store");
+            }
+            else
+            {
+                await manager.AddToRoleAsync(user, "Store");
+            }
+
             return true;
         }
-
-        public async Task<bool> changeAuthorizationAsync(int id)
-        {
-            User user = await userManager.GetUserAsync(HttpContext.User);
-
-            if (user == null)
-            {
-                return false;
-            }
-        }
-         * */
 
     }
 }
