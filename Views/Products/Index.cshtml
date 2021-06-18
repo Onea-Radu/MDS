@@ -4,11 +4,11 @@
     ViewData["Title"] = "All products";
 }
 
-    <h1>All products</h1>
-    <form asp-action="Index">
-        <input type="text" placeholder="Search.." name="keyword">
-        <button type="submit">Submit</button>
-    </form>
+<h1>All products</h1>
+<form asp-action="Index">
+    <input type="text" placeholder="Search.." name="keyword">
+    <button type="submit">Submit</button>
+</form>
 
 <p>
     @if (User.IsInRole("Store") || User.IsInRole("Admin"))
@@ -34,26 +34,33 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
-                
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                <a asp-controller="Users" asp-action="Profile" asp-route-id="@item.SellerId">@Html.DisplayFor(modelItem => item.Seller.UserName)</a>
-            </td>
-            @if ((item.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
-            {
+            <tr>
                 <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <form method="post" asp-action="Delete" asp-route-id="@item.Id"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
-                <form method="post" asp-controller="Users" asp-action="Delete" asp-route-id="6d19b9f7-3bcd-42fe-fc8c-08d931ccb105"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
+                    <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+
                 </td>
-            }
-        </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    <a asp-controller="Users" asp-action="Profile" asp-route-id="@item.SellerId">@Html.DisplayFor(modelItem => item.Seller.UserName)</a>
+                </td>
+                @if ((item.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <form method="post" asp-action="Delete" asp-route-id="@item.Id"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
+
+                    </td>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <form method="post" asp-controller="User" asp-action="Delete" asp-route-id="@item.SellerId"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
+                        <form method="post" asp-controller="User" asp-action="Toggle" asp-route-id="@item.SellerId"><a id="delete" onclick="this.parentElement.submit()">Toggle</a></form>
+                    </td>
+                }
+            </tr>
         }
     </tbody>
 </table>
