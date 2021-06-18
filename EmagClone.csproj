@@ -7,24 +7,31 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Migrations\20210615130016_reviews.orders.problems.cs" />
-	  <Compile Remove="Migrations\20210615130016_reviews.orders.problems.Designer.cs" />
-	  <Compile Remove="Migrations\20210615132546_reviews.orders.problemss.cs" />
-	  <Compile Remove="Migrations\20210615132546_reviews.orders.problemss.Designer.cs" />
-	  <Compile Remove="Migrations\20210615132722_reviews.orders.problemss.cs" />
-	  <Compile Remove="Migrations\20210615132722_reviews.orders.problemss.Designer.cs" />
-	  <Compile Remove="Migrations\20210615133127_reviews.orders.problems.cs" />
-	  <Compile Remove="Migrations\20210615133127_reviews.orders.problems.Designer.cs" />
-	  <Compile Remove="Migrations\20210615133722_reviews-orders-problems.cs" />
-	  <Compile Remove="Migrations\20210615133722_reviews-orders-problems.Designer.cs" />
-	  <Compile Remove="Migrations\20210615133913_reviews-orders-problems.cs" />
-	  <Compile Remove="Migrations\20210615133913_reviews-orders-problems.Designer.cs" />
-	  <Compile Remove="Migrations\20210617192846_nume.cs" />
-	  <Compile Remove="Migrations\20210617192846_nume.Designer.cs" />
-	  <Compile Remove="Migrations\20210617193210_nume.cs" />
-	  <Compile Remove="Migrations\20210617193210_nume.Designer.cs" />
-	  <Compile Remove="Migrations\20210617200330_new.cs" />
-	  <Compile Remove="Migrations\20210617200330_new.Designer.cs" />
+		<Compile Remove="Tests\**" />
+		<Content Remove="Tests\**" />
+		<EmbeddedResource Remove="Tests\**" />
+		<None Remove="Tests\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="Migrations\20210615130016_reviews.orders.problems.cs" />
+		<Compile Remove="Migrations\20210615130016_reviews.orders.problems.Designer.cs" />
+		<Compile Remove="Migrations\20210615132546_reviews.orders.problemss.cs" />
+		<Compile Remove="Migrations\20210615132546_reviews.orders.problemss.Designer.cs" />
+		<Compile Remove="Migrations\20210615132722_reviews.orders.problemss.cs" />
+		<Compile Remove="Migrations\20210615132722_reviews.orders.problemss.Designer.cs" />
+		<Compile Remove="Migrations\20210615133127_reviews.orders.problems.cs" />
+		<Compile Remove="Migrations\20210615133127_reviews.orders.problems.Designer.cs" />
+		<Compile Remove="Migrations\20210615133722_reviews-orders-problems.cs" />
+		<Compile Remove="Migrations\20210615133722_reviews-orders-problems.Designer.cs" />
+		<Compile Remove="Migrations\20210615133913_reviews-orders-problems.cs" />
+		<Compile Remove="Migrations\20210615133913_reviews-orders-problems.Designer.cs" />
+		<Compile Remove="Migrations\20210617192846_nume.cs" />
+		<Compile Remove="Migrations\20210617192846_nume.Designer.cs" />
+		<Compile Remove="Migrations\20210617193210_nume.cs" />
+		<Compile Remove="Migrations\20210617193210_nume.Designer.cs" />
+		<Compile Remove="Migrations\20210617200330_new.cs" />
+		<Compile Remove="Migrations\20210617200330_new.Designer.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -42,10 +49,6 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
 		<PackageReference Include="NETCore.MailKit" Version="2.0.3" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Tests\" />
 	</ItemGroup>
 
 </Project>
