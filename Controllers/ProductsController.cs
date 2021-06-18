@@ -131,7 +131,7 @@ namespace EmagClone.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             bool check = service.Delete(id);
-            Debug.Assert(service.Delete(id));
+            Debug.Assert(check);
             if (!check)
             {
                 return NotFound();
