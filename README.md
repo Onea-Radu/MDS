@@ -1,5 +1,5 @@
 # Shop platform
-This repository contains a shop platform developed in ASP.NET MVC Core by [Luana Strimbeanu](https://github.com/st-lu) [Radu Onea](https://github.com/Onea-Radu) [Matei Mindruleanu](https://github.com/M4731) [Daria Hazaparu](https://github.com/dariahazaparu) [Vladimir Jelea](https://github.com/vladirares)
+This repository contains a shop platform developed in ASP.NET MVC Core by [Luana Strimbeanu](https://github.com/st-lu), [Radu Onea](https://github.com/Onea-Radu), [Matei Mindruleanu](https://github.com/M4731), [Daria Hazaparu](https://github.com/dariahazaparu), [Vladimir Jelea](https://github.com/vladirares)
 
 ##Description
 
