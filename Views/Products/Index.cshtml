@@ -56,8 +56,8 @@
                 @if (User.IsInRole("Admin"))
                 {
                     <td>
-                        <form method="post" asp-controller="User" asp-action="Delete" asp-route-id="@item.SellerId"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
-                        <form method="post" asp-controller="User" asp-action="Toggle" asp-route-id="@item.SellerId"><a id="delete" onclick="this.parentElement.submit()">Toggle</a></form>
+                        <form method="post" asp-controller="Users" asp-action="Delete" asp-route-id="@item.SellerId"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
+                        <form method="post" asp-controller="Users" asp-action="Toggle" asp-route-id="@item.SellerId"><a id="delete" onclick="this.parentElement.submit()">Toggle</a></form>
                     </td>
                 }
             </tr>
