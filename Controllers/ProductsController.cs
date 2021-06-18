@@ -28,6 +28,7 @@ namespace EmagClone.Controllers
         {
             if (keyword == null || keyword == "")
             {
+                ViewBag.prods = service.GetAll();
                 return View(service.GetAll());
             }
 

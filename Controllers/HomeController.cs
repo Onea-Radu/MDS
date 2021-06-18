@@ -28,7 +28,8 @@ namespace OldIronIronWeTake.Controllers
 
         public IActionResult Index()
         {
-            return View();
+
+            return View(productService.GetAll());
         }
 
         public IActionResult Privacy()
