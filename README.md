@@ -34,7 +34,9 @@ We used Microsoft Visual Studio for the development of this application, which u
 TBA
 
 ## Automation Testing
-TBA
+Integration tests at https://github.com/Onea-Radu/MDS-Tests.
+Need to be in an adjacent folder to run the tests.
+![image](https://user-images.githubusercontent.com/24993977/122580432-a180ad00-d05e-11eb-80c9-f8f36c8ca153.png)
 
 ## UML Scheme
 TBA
