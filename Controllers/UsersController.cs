@@ -55,7 +55,9 @@ namespace EmagClone.Controllers
             if (ModelState.IsValid)
             {
                 var user = (await manager.GetUserAsync(HttpContext.User));
-                if (!cartService.AddToCart(id, user))
+                bool check = cartService.AddToCart(id, user);
+                Debug.Assert(check);
+                if (!check)
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -116,7 +118,7 @@ namespace EmagClone.Controllers
         public async Task<IActionResult> RemoveFavorite(int id)
         {
             var check = favoritesService.RemoveFromFavorites(id);
-            Debug.Assert(favoritesService.RemoveFromFavorites(id));
+            Debug.Assert(check);
             if (!check)
             {
                 return NotFound();
