@@ -149,7 +149,7 @@ namespace EmagClone.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<bool> Toggle(int id)
+        public async Task<bool> Toggle(Guid id)
         {
             User user = context.Users.Find(id);
 
