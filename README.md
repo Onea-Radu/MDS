@@ -1,15 +1,15 @@
 # Shop platform
 This repository contains a shop platform developed in ASP.NET MVC Core by [Luana Strimbeanu](https://github.com/st-lu), [Radu Onea](https://github.com/Onea-Radu), [Matei Mindruleanu](https://github.com/M4731), [Daria Hazaparu](https://github.com/dariahazaparu), [Vladimir Jelea](https://github.com/vladirares)
 
-##Description
+## Description
 
 Simple shop web application with functionalities such as: add to cart, add to favorites, user profile, reviews system, report a problem
 
-##Trello & Bug reporting
+## Trello & Bug reporting
 
 We used Trello for the agile component of development: https://trello.com/b/ylkpl4vL/agile-online-store. We also used GitHub's built-in Issues feature for bug reporting, as well as the Trello log.
 
-##User stories:
+## User stories:
 
 1. As a user, I want to post about a product so others can buy it. ✓
 2. As a user, I want to buy posted products. X
@@ -26,15 +26,15 @@ We used Trello for the agile component of development: https://trello.com/b/ylkp
 13. As a user i want to login and register with facebook. ✓
 14. As a user i want to login and register with google. ✓
 
-##Build tools
+## Build tools
 
 We used Microsoft Visual Studio for the development of this application, which uses the integrated [MSBuild](https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild?view=vs-2019) tool
 
-##Demo
+## Demo
 TBA
 
-##Automation Testing
+## Automation Testing
 TBA
 
-##UML Scheme
+## UML Scheme
 TBA
