@@ -23,9 +23,6 @@
                     <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">@Html.DisplayFor(modelItem => item.Product.Name)</a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Product.Seller.UserName)
-                </td>
-                <td>
                     @*@if ((item.Product.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
                     {
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>

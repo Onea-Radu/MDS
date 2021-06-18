@@ -1,6 +1,7 @@
 ﻿using EmagClone.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OldIronIronWeTake.Data;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace EmagClone.Services
 
         public List<CartProductsUsers> GetAll(User user)
         {
-            return context.CartProductsUsers.Where(u => u.User == user).ToList();
+            return context.CartProductsUsers.Include("Product").Include("User").Where(u => u.User == user).ToList();
         }
 
         //maybe do it with product id

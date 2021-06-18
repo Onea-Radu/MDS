@@ -51,6 +51,6 @@
 {
     <div>
         <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-        <a asp-controller="Products" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        <form method="post" asp-controller="Products" asp-action="Delete" asp-route-id="@Model.Id"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
     </div>
 }

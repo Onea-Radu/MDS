@@ -126,7 +126,7 @@ namespace EmagClone.Controllers
 
 
         // POST: Products/Delete/5
-        [HttpPost]
+        //[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
