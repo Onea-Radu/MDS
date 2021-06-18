@@ -1,7 +1,13 @@
-﻿@model IEnumerable<EmagClone.Entities.User>
+﻿@model IEnumerable<EmagClone.Entities.Product>
+@*@model EmagClone.Entities.User*@
 
 @{
     ViewData["Title"] = "Listed products";
 }
 
 <h1>Listed products</h1>
+
+@foreach(var item in Model)
+{
+    @item.Name;
+}

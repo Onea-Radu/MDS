@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Seller.UserName)
+                <a asp-controller="Users" asp-action="Profile" asp-route-id="@item.SellerId">@Html.DisplayFor(modelItem => item.Seller.UserName)</a>
             </td>
             @if ((item.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
             {

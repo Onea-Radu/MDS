@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OldIronIronWeTake.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,9 +23,16 @@ namespace EmagClone.Services
         {
             return context.Products.Include("Seller").ToList();
         }
-        public List<Product> GetByUser(User user)
+        public List<Product> GetByUser(Guid user)
         {
-            return context.Products.Include("Seller").Where(p => p.Seller == user).ToList();
+            var lista = context.Products.Include("Seller").Where(p => p.Seller.Id == user).ToList();
+            Debug.WriteLine(user);
+            foreach(var item in context.Products)
+            {
+                Debug.WriteLine(item.SellerId);
+            }
+            Debug.WriteLine(lista.Count);
+            return lista;
         }
         public IEnumerable<Product> Search(string keyword)
         {

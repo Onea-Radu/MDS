@@ -35,9 +35,9 @@ namespace EmagClone.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Profile()
+        public async Task<IActionResult> Profile(Guid id)
         {
-            return View();
+            return View(products.GetByUser(id));
         }
 
         [Authorize(Roles = "User,Store,Admin")]
