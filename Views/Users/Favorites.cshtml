@@ -20,17 +20,17 @@
         {
         <tr>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Product.Name)</a>
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">@Html.DisplayFor(modelItem => item.Product.Name)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Seller.UserName)
             </td>
             <td>
-                @if ((item.Product.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
+                @*@if ((item.Product.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
                 {
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.Id"> Details </a>
-                }
+                }*@
                 <form method="post" asp-action="RemoveFavorite" asp-route-id="@item.Id"><a id="delete" onclick="this.parentElement.submit()">Remove from Favorites</a></form>
             </td>
         </tr>
