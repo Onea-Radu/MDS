@@ -4,21 +4,18 @@ using Microsoft.EntityFrameworkCore;
 using OldIronIronWeTake.Data;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmagClone.Services
 {
     public class FavoritesService
     {
         private readonly ApplicationDbContext context;
-        private readonly UserManager<User> userManager;
 
-        public FavoritesService(ApplicationDbContext context, UserManager<User> userManager)
+
+        public FavoritesService(ApplicationDbContext context)
         {
             this.context = context;
-            this.userManager = userManager;
         }
 
         public List<FavoriteProductsUsers> GetAll(User user)
@@ -51,7 +48,7 @@ namespace EmagClone.Services
                 context.SaveChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
