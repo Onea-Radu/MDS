@@ -7,13 +7,27 @@
     <div class="text-center">
         <h1 class="display-4">Welcome</h1>
         <p>Latest products:</p>
-        @*@foreach (var item in Model)
+        <br />
+        <hr />
+        <br />
+        @{ 
+            var i = 0;
+        } 
+        @foreach (var item in Model)
         {
-                <div>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </div>
-                <div>
-                    @Html.DisplayFor(modelItem => item.Seller.UserName)
-                </div>
-        }*@
+            if (i == 4)
+            {
+                break;
+            }
+            i += 1;
+            <div>
+                @Html.DisplayFor(modelItem => item.Name)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.Seller.UserName)
+            </div>
+            <br />
+            <hr />
+            <br />
+        }
     </div>
