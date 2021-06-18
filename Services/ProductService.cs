@@ -21,7 +21,7 @@ namespace EmagClone.Services
 
         public List<Product> GetAll()
         {
-            return context.Products.Include("Seller").ToList();
+            return context.Products.Include("Seller").Include("Reviews").Include("Reviews.User").ToList();
         }
         public List<Product> GetByUser(Guid user)
         {
@@ -41,7 +41,7 @@ namespace EmagClone.Services
 
         public Product Get(int id)
         {
-            var x = context.Products.Include("Seller").Where(p => p.Id == id);
+            var x = context.Products.Include("Seller").Include("Reviews").Include("Reviews.User").Where(p => p.Id == id);
             if (!x.Any())
             {
                 return null;

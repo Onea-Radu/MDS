@@ -19,26 +19,11 @@
             @Html.DisplayNameFor(model => model.Seller)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Seller.UserName)
-        </dd>
+            <a asp-controller="Users" asp-action="Profile" asp-route-id="@Model.SellerId">
+                @Html.DisplayFor(model => model.Seller.UserName)
+            </a>
+</dd>
     </dl>
-</div>
-
-<div>
-    @if (Model.Reviews != null)
-    {
-        @foreach (var x in Model.Reviews)
-        {
-            <p>@x.User.UserName</p>
-            <p>@x.Text</p>
-
-            @if ((Model.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
-            {
-                <a asp-controller="Reviews" asp-action="Delete" asp-route-id="@x.Id">Delete</a>
-            }
-        }
-    }
-
 </div>
 
 <div>
@@ -54,3 +39,54 @@
         <form method="post" asp-controller="Products" asp-action="Delete" asp-route-id="@Model.Id"><a id="delete" onclick="this.parentElement.submit()">Delete</a></form>
     </div>
 }
+
+@*<div>
+        @if (Model.Reviews != null)
+        {
+            @foreach (var x in Model.Reviews)
+            {
+                <p>@x.User.UserName</p>
+                <p>@x.Text</p>
+
+                @if ((Model.Seller.UserName == Context.User.Identity.Name && User.IsInRole("Store")) || User.IsInRole("Admin"))
+                {
+                    <a asp-controller="Reviews" asp-action="Delete" asp-route-id="@x.Id">Delete</a>
+                }
+            }
+        }
+
+    </div>*@
+
+<br />
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Username
+            </th>
+            <th>
+                Review
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Reviews != null)
+        {
+            @foreach (var item in Model.Reviews)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Users" asp-action="Profile" asp-route-id="@item.UserId">@item.User.UserName</a>
+
+</td>
+                    <td>
+                        @item.Text
+                    </td>
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
