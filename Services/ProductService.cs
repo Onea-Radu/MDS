@@ -90,7 +90,7 @@ namespace EmagClone.Services
                 return false;
             }
 
-            context.Remove(product);
+            context.Products.Remove(product);
             context.SaveChanges();
             return true;
 
