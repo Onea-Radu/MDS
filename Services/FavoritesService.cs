@@ -28,9 +28,12 @@ namespace EmagClone.Services
         {
             try
             {
-                var prod = new FavoriteProductsUsers { Product = context.Products.Find(pid), User = user };
-                context.FavoriteProductsUsers.Add(prod);
-                context.SaveChanges();
+                if (context.FavoriteProductsUsers.Find(pid) == null)
+                {
+                    var prod = new FavoriteProductsUsers { Product = context.Products.Find(pid), User = user };
+                    context.FavoriteProductsUsers.Add(prod);
+                    context.SaveChanges();
+                }
                 return true;
             }
             catch (Exception e)

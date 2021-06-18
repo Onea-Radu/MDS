@@ -28,6 +28,7 @@ namespace EmagClone.Controllers
         {
             if (keyword == null || keyword == "")
             {
+                ViewBag.prods = service.GetAll();
                 return View(service.GetAll());
             }
 
@@ -74,7 +75,8 @@ namespace EmagClone.Controllers
             if (ModelState.IsValid)
             {
                 product.SellerId = (await manager.GetUserAsync(HttpContext.User)).Id;
-                service.Post(product);
+                Debug.Assert(service.Post(product));
+                //service.Post(product);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -109,7 +111,9 @@ namespace EmagClone.Controllers
 
             if (ModelState.IsValid)
             {
-                if (!service.Update(product, (int)id))
+                bool check = service.Update(product, (int)id);
+                Debug.Assert(service.Update(product, (int)id));
+                if (!check)
                 {
                     return NotFound();
                 }
@@ -122,11 +126,13 @@ namespace EmagClone.Controllers
 
 
         // POST: Products/Delete/5
-        [HttpPost]
+        //[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!service.Delete(id))
+            bool check = service.Delete(id);
+            Debug.Assert(check);
+            if (!check)
             {
                 return NotFound();
             }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OldIronIronWeTake.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,9 +21,19 @@ namespace EmagClone.Services
 
         public List<Product> GetAll()
         {
-            return context.Products.Include("Seller").ToList();
+            return context.Products.Include("Seller").Include("Reviews").Include("Reviews.User").ToList();
         }
-
+        public List<Product> GetByUser(Guid user)
+        {
+            var lista = context.Products.Include("Seller").Where(p => p.Seller.Id == user).ToList();
+            Debug.WriteLine(user);
+            foreach(var item in context.Products)
+            {
+                Debug.WriteLine(item.SellerId);
+            }
+            Debug.WriteLine(lista.Count);
+            return lista;
+        }
         public IEnumerable<Product> Search(string keyword)
         {
             return GetAll().Where(p => p.Name.Contains(keyword));
@@ -30,7 +41,7 @@ namespace EmagClone.Services
 
         public Product Get(int id)
         {
-            var x = context.Products.Include("Seller").Where(p => p.Id == id);
+            var x = context.Products.Include("Seller").Include("Reviews").Include("Reviews.User").Where(p => p.Id == id);
             if (!x.Any())
             {
                 return null;
@@ -87,7 +98,7 @@ namespace EmagClone.Services
                 return false;
             }
 
-            context.Remove(product);
+            context.Products.Remove(product);
             context.SaveChanges();
             return true;
 

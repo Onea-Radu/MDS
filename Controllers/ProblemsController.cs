@@ -43,7 +43,8 @@ namespace EmagClone.Controllers
             if (ModelState.IsValid)
             {
                 service.Add(problem);
-                return RedirectToAction(nameof(Index), "Home");
+                ViewBag.msg = "Notice submitted successfully. Thank you!";
+                return View();
             }
 
             return View(problem);

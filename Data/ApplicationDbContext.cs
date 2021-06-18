@@ -27,30 +27,30 @@ namespace OldIronIronWeTake.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<CartProductsUsers>()
-            //.HasOne(c => c.Product)
-            //.WithMany()
-            //.OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<CartProductsUsers>()
+            .HasOne(c => c.Product)
+            .WithMany()
+            .OnDelete(DeleteBehavior.NoAction);
 
-            //modelBuilder.Entity<CartProductsUsers>()
-            //.HasOne(c => c.User)
-            //.WithMany()
-            //.OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<CartProductsUsers>()
+            .HasOne(c => c.User)
+            .WithMany()
+            .OnDelete(DeleteBehavior.NoAction);
 
-            //modelBuilder.Entity<FavoriteProductsUsers>()
-            //.HasOne(c => c.User)
-            //.WithMany()
-            //.OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<FavoriteProductsUsers>()
+            .HasOne(c => c.User)
+            .WithMany()
+            .OnDelete(DeleteBehavior.NoAction);
 
-            //modelBuilder.Entity<FavoriteProductsUsers>()
-            //.HasOne(c => c.Product)
-            //.WithMany()
-            //.OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<FavoriteProductsUsers>()
+            .HasOne(c => c.Product)
+            .WithMany()
+            .OnDelete(DeleteBehavior.NoAction);
 
-            //modelBuilder.Entity<Review>()
-            //.HasOne(c => c.User)
-            //.WithMany()
-            //.OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Review>()
+            .HasOne(c => c.User)
+            .WithMany()
+            .OnDelete(DeleteBehavior.NoAction);
 
 
             modelBuilder.Entity<FavoriteProductsUsers>()

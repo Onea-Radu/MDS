@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using OldIronIronWeTake.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,13 +18,15 @@ namespace EmagClone.Controllers
         private readonly UserManager<User> manager;
         private FavoritesService favoritesService;
         private CartService cartService;
+        private ProductService products;
         private readonly ApplicationDbContext context;
 
-        public UsersController(UserManager<User> userManager, FavoritesService favoritesService, CartService cart, ApplicationDbContext context)
+        public UsersController(UserManager<User> userManager, ProductService products, FavoritesService favoritesService, CartService cart, ApplicationDbContext context)
         {
             this.manager = userManager;
             this.favoritesService = favoritesService;
             cartService = cart;
+            this.products = products;
             this.context = context;
         }
 
@@ -32,16 +35,16 @@ namespace EmagClone.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Profile()
+        public async Task<IActionResult> Profile(Guid id)
         {
-            return View();
+            return View(products.GetByUser(id));
         }
 
         [Authorize(Roles = "User,Store,Admin")]
         public async Task<IActionResult> Cart()
         {
             var user = (await manager.GetUserAsync(HttpContext.User));
-            return View(favoritesService.GetAll(user));
+            return View(cartService.GetAll(user));
         }
 
         [HttpPost]
@@ -52,7 +55,9 @@ namespace EmagClone.Controllers
             if (ModelState.IsValid)
             {
                 var user = (await manager.GetUserAsync(HttpContext.User));
-                if (!cartService.AddToCart(id, user))
+                bool check = cartService.AddToCart(id, user);
+                Debug.Assert(check);
+                if (!check)
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -95,7 +100,9 @@ namespace EmagClone.Controllers
             if (ModelState.IsValid)
             {
                 var user = (await manager.GetUserAsync(HttpContext.User));
-                if (!favoritesService.AddToFavorites(id, user))
+                bool check = favoritesService.AddToFavorites(id, user);
+                Debug.Assert(check);
+                if (!check)
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -110,7 +117,9 @@ namespace EmagClone.Controllers
         [Authorize(Roles = "User,Store,Admin")]
         public async Task<IActionResult> RemoveFavorite(int id)
         {
-            if (!favoritesService.RemoveFromFavorites(id))
+            var check = favoritesService.RemoveFromFavorites(id);
+            Debug.Assert(check);
+            if (!check)
             {
                 return NotFound();
             }
@@ -120,7 +129,7 @@ namespace EmagClone.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "User,Store,Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<bool> Delete(Guid id)
         {
             User user = context.Users.Find(id);
@@ -137,8 +146,10 @@ namespace EmagClone.Controllers
         }
 
 
-        /*
-          public bool deleteUser(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<bool> changeAuthorizationAsync(int id)
         {
             User user = context.Users.Find(id);
 
@@ -146,21 +157,18 @@ namespace EmagClone.Controllers
             {
                 return false;
             }
-            context.Remove(user);
-            context.SaveChanges();
+
+            if ((await manager.GetRolesAsync(user)).Contains("Store"))
+            {
+                await manager.RemoveFromRoleAsync(user, "Store");
+            }
+            else
+            {
+                await manager.AddToRoleAsync(user, "Store");
+            }
+
             return true;
         }
-
-        public async Task<bool> changeAuthorizationAsync(int id)
-        {
-            User user = await userManager.GetUserAsync(HttpContext.User);
-
-            if (user == null)
-            {
-                return false;
-            }
-        }
-         * */
 
     }
 }

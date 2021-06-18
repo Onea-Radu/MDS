@@ -22,12 +22,14 @@ namespace OldIronIronWeTake.Controllers
         {
             _logger = logger;
             this.seeder = seeder;
+            seeder.Seed();
             this.productService = productService;
         }
 
         public IActionResult Index()
         {
-            return View();
+
+            return View(productService.GetAll());
         }
 
         public IActionResult Privacy()
